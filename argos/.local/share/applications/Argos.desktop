@@ -1,0 +1,7 @@
+[Desktop Entry]
+Comment=
+Terminal=false
+Name=Argos
+Exec=/home/clement/.anaconda3/bin//argos
+Type=Application
+Icon=android-studio

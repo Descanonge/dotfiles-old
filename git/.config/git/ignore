@@ -1,0 +1,110 @@
+# Vim
+*.swp
+
+# Emacs
+.projectile
+
+#Various
+*.png
+*.svg
+*.jpg
+*.avi
+*.mp4
+*.mkv
+*.xcf
+
+#Jabref Backup & save
+*.bib.bak
+*.bib.sav
+
+## Core latex/pdflatex auxiliary files:
+*.pdf
+*.aux
+*.lof
+*.log
+*.lot
+*.fls
+*.out
+*.toc
+*.fmt
+*.fot
+*.cb
+*.cb2
+
+## Intermediate documents:
+*.dvi
+*.xdv
+*-converted-to.*
+
+## Bibliography auxiliary files (bibtex/biblatex/biber):
+*.bbl
+*.bcf
+*.blg
+*-blx.aux
+*-blx.bib
+*.run.xml
+
+## Build tool auxiliary files:
+*.fdb_latexmk
+*.synctex
+*.synctex(busy)
+*.synctex.gz
+*.synctex.gz(busy)
+*.pdfsync
+
+
+# amsthm
+*.thm
+
+# beamer
+*.nav
+*.pre
+*.snm
+*.vrb
+
+# endnotes
+*.ent
+
+# hyperref
+*.brf
+
+### Python ###
+# Cache files
+*.pyc
+
+### Fortran ###
+# Prerequisites
+*.d
+
+# Compiled Object files
+*.slo
+*.lo
+*.o
+*.obj
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Compiled Dynamic libraries
+*.so
+*.dylib
+*.dll
+
+# Fortran module files
+*.mod
+*.smod
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+*.lib
+
+# Executables
+*.exe
+*.out
+*.app
+
+# Temp files
+*.temp
