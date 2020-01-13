@@ -29,6 +29,7 @@
         "<M-up>" (lambda () (interactive) (evil-scroll-line-up scroll-step))
         "<M-down>" (lambda () (interactive) (evil-scroll-line-down scroll-step))))
 
+
 (map! :n "M-l" ":m-2")
 (map! :n "M-a" ":m+")
 
