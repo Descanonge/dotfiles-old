@@ -33,6 +33,8 @@ if os.access(ignore_file, os.F_OK):
 else:
     ignore = []
 
+ignore.append('not_to_deploy')
+
 
 class Entry():
 
