@@ -49,9 +49,3 @@ if [ -d "$HOME/.local/bin" ] ; then
     PATH="$HOME/.local/bin:$PATH"
 fi
 
-
-# Custom keyboard
-if [ "$XDG_SESSION_TYPE" = "x11" ]; then
-    . "$HOME/.scripts/keyboard/int_kbd.sh"
-fi
-
