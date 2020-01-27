@@ -7,13 +7,6 @@
 #umask 022
 
 
-# set PATH so it includes python
-if [ -d "$HOME/.anaconda3/bin" ]; then
-    PATH="$HOME/.anaconda3/bin:$PATH"
-fi
-
-export PYTHONPATH="$HOME/.anaconda3/pythonpath"
-
 # Locales
 export LANG=en_US.utf8
 export LC_MONETARY=fr_FR.utf8
@@ -40,12 +33,14 @@ if [ -n "$ZSH_VERSION" ]; then
 fi
 
 # set PATH so it includes user's private bin if it exists
-if [ -d "$HOME/bin" ] ; then
-    PATH="$HOME/bin:$PATH"
+if [ -d "$HOME/.local/bin" ] ; then
+    PATH="$PATH:$HOME/.local/bin"
 fi
 
-# set PATH so it includes user's private bin if it exists
-if [ -d "$HOME/.local/bin" ] ; then
-    PATH="$HOME/.local/bin:$PATH"
+# set PATH so it includes python
+if [ -d "$HOME/.anaconda3/bin" ]; then
+    PATH="$PATH:$HOME/.anaconda3/bin"
 fi
+
+export PYTHONPATH="$HOME/.anaconda3/pythonpath"
 
