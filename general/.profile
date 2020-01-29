@@ -32,14 +32,14 @@ if [ -n "$ZSH_VERSION" ]; then
     fi
 fi
 
-# set PATH so it includes user's private bin if it exists
-if [ -d "$HOME/.local/bin" ] ; then
-    PATH="$PATH:$HOME/.local/bin"
-fi
-
 # set PATH so it includes python
 if [ -d "$HOME/.anaconda3/bin" ]; then
-    PATH="$PATH:$HOME/.anaconda3/bin"
+    PATH="$HOME/.anaconda3/bin:$PATH"
+fi
+
+# set PATH so it includes user's private bin if it exists
+if [ -d "$HOME/.local/bin" ] ; then
+    PATH="$HOME/.local/bin:$PATH"
 fi
 
 export PYTHONPATH="$HOME/.anaconda3/pythonpath"
