@@ -11,6 +11,7 @@
 	hist = log --oneline --decorate --graph --branches --abbrev-commit --simplify-by-decoration
 [core]
 	excludesfile = /home/clement/.gitignore_global
+	editor = vim
 [push]
 	default = simple
 [cola]
