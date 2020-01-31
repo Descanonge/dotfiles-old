@@ -4,7 +4,10 @@
 # Emacs
 .projectile
 
-#Various
+## Build directories
+_build/
+
+# Various
 *.png
 *.svg
 *.jpg
@@ -70,7 +73,23 @@
 
 ### Python ###
 # Cache files
-*.pyc
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Distribution / packaging
+.Python
+develop-eggs/
+eggs/
+.eggs/
+wheels/
+*.egg-info/
+*.egg
+.pytest_cache/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
 
 ### Fortran ###
 # Prerequisites
@@ -81,6 +100,7 @@
 *.lo
 *.o
 *.obj
+*.o.d
 
 # Precompiled Headers
 *.gch
