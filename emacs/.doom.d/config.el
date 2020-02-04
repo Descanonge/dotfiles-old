@@ -19,11 +19,11 @@
 ;;         :desc "run def & step" "D" #'elpy-shell-send-defun-and-step))
 
 (map! :map magit-mode-map "M-n" nil)
-(map!
+(map! (:map override
         "M-t" #'evil-window-right
         "M-n" #'evil-window-left
         "M-g" #'evil-window-up
-        "M-r" #'evil-window-down)
+        "M-r" #'evil-window-down))
 
 (setq scroll-step 5)
 (evil-define-motion scroll-n-lines-up (count)
