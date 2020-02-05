@@ -78,6 +78,22 @@
 ;; Python
 ;; Make python cell mode default
 (add-hook! 'python-mode-hook #'python-cell-mode)
+
+(defun python-cell-range-function ()
+  "Function to call to return highlight range.
+Highlight only the cell title. Return nil if the title
+is off screen."
+  (save-match-data
+    (save-excursion
+      (progn (end-of-line)
+             (if (re-search-backward python-cell-cellbreak-regexp nil t)
+                 (let ((start (goto-char (match-beginning 0)))
+                       (end (goto-char (match-end 0))))
+                   `(,start . ,end))
+               nil))))
+  )
+
+
 ;; Make default shell ipython
 (setq! python-shell-interpreter "ipython"
        python-shell-interpreter-args "console --simple-prompt"
@@ -87,19 +103,24 @@
 (defun jupyter-connect-name (filename)
   "Connect to a jupyter kernel by its `filename'."
   (interactive (list (read-string "Connection file name: ")))
-  (jupyter-connect-repl (concat "~/.local/share/jupyter/runtime/" filename)))
+  ;; client (jupyter-connect-repl (concat "~/.local/share/jupyter/runtime/" filename) filename))
+  (setq client (jupyter-connect-repl (concat "~/.local/share/jupyter/runtime/" filename) filename))
+  (jupyter-repl-associate-buffer client))
 
 ;; maybe must connect it to buffer too
+;; set a buffer name for jupyter repl / client ?
 
 
 ;; Send cell to jupyter
 (defun jupyter-eval-cell ()
   "Eval current IPython cell."
   (interactive)
-  (start (save-excursion (python-beginning-of-cell)
-                          (point)))
-  (end (save-excursion (python-end-of-cell)))
-  (jupyter-eval-region start end))
+  (let (
+        (start (save-excursion (python-beginning-of-cell)
+                               (point)))
+        (end (save-excursion (python-end-of-cell)
+                             (point))))
+  (jupyter-eval-region start end)))
 
 ;; Keybinds for jupyter-emacs
 (map! :map jupyter-repl-interaction-mode-map "M-i" nil)
