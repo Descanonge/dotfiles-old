@@ -16,6 +16,4 @@
 
 (package! org-projectile)
 
-(package! fill-column-indicator)
-
 (package! doom-themes)

@@ -76,7 +76,37 @@
 (setq! flycheck-check-syntax-automatically '(mode-enabled save))
 
 ;; Python
+;; Make python cell mode default
 (add-hook! 'python-mode-hook #'python-cell-mode)
+;; Make default shell ipython
 (setq! python-shell-interpreter "ipython"
        python-shell-interpreter-args "console --simple-prompt"
        python-shell-prompt-detect-failure-warning nil)
+
+;; Function to find existing kernel by its filename
+(defun jupyter-connect-name (filename)
+  "Connect to a jupyter kernel by its `filename'."
+  (interactive (list (read-string "Connection file name: ")))
+  (jupyter-connect-repl (concat "~/.local/share/jupyter/runtime/" filename)))
+
+;; maybe must connect it to buffer too
+
+
+;; Send cell to jupyter
+(defun jupyter-eval-cell ()
+  "Eval current IPython cell."
+  (interactive)
+  (start (save-excursion (python-beginning-of-cell)
+                          (point)))
+  (end (save-excursion (python-end-of-cell)))
+  (jupyter-eval-region start end))
+
+;; Keybinds for jupyter-emacs
+(map! :map jupyter-repl-interaction-mode-map "M-i" nil)
+(map! :leader
+      (:prefix-map ("r" . "run")
+        :desc "Connect to kernel" "k" #'jupyter-connect-name
+        :desc "Send line ro region" "l" #'jupyter-eval-line-or-region
+        :desc "Send string" "s" #'jupyter-eval-string-command
+        :desc "Send cell" "c" #'jupyter-eval-cell
+        ))
