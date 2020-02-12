@@ -1,49 +1,5 @@
 ;;; .doom.d/config.el -*- lexical-binding: t; -*-
 
-;; Place your private configuration here
-
-
-
-(map! :leader
-      "%" #'comment-line)
-
-;; (map! :leader
-;;       (:prefix-map ("r" . "run")
-;;         :desc "run line" "l" #'elpy-shell-send-statement
-;;         :desc "run buffer" "b" #'elpy-shell-send-buffer
-;;         :desc "run codecell" "c" #'elpy-shell-send-codecell
-;;         :desc "run def" "d" #'elpy-shell-send-defun
-;;         :desc "run line & step" "L" #'elpy-shell-send-statement-and-step
-;;         :desc "run buffer & step" "B" #'elpy-shell-send-buffer-and-step
-;;         :desc "run codecell & step" "C" #'elpy-shell-send-codecell-and-step
-;;         :desc "run def & step" "D" #'elpy-shell-send-defun-and-step))
-
-(map! :map magit-mode-map "M-n" nil)
-(map! (:map override
-        "M-t" #'evil-window-right
-        "M-n" #'evil-window-left
-        "M-g" #'evil-window-up
-        "M-r" #'evil-window-down))
-
-(setq scroll-step 5)
-(evil-define-motion scroll-n-lines-up (count)
-  "Scroll `scroll-step' up"
-  (evil-scroll-line-up scroll-step))
-(evil-define-motion scroll-n-lines-down (count)
-  "Scroll `scroll-step' down"
-  (evil-scroll-line-down scroll-step))
-(map!
-        "<M-up>" #'scroll-n-lines-up
-        "<M-down>" #'scroll-n-lines-down)
-
-(map! :n "M-l" ":m-2")
-(map! :n "M-a" ":m+")
-
-(require 'doom-themes)
-(load-theme 'doom-one-light)
-
-(doom-themes-org-config)
-
 
 ;; PROJECTILE folders
 (setq projectile-project-search-path
@@ -54,31 +10,81 @@
         "~/Documents/Programmes/Applications/"))
 
 
-(use-package! projectile
-  :init
+;; Comment kb
+(map! :leader
+      "%" #'comment-line)
+
+;; Change window kb
+(map! :map magit-mode-map "M-n" nil)
+(map! (:map override
+        "M-t" #'evil-window-right
+        "M-n" #'evil-window-left
+        "M-g" #'evil-window-up
+        "M-r" #'evil-window-down))
+
+;; Org move item kb
+(map! (:map evil-org-mode-map
+        :niv "M-l" #'org-metaup
+        :niv "M-a" #'org-metadown
+        :niv "M-i" #'org-metaleft
+        :niv "M-e" #'org-metaright))
+
+;; Move line kb
+(map! :n "M-l" ":m-2")
+(map! :n "M-a" ":m+")
+
+;; Centered mode kb
+(map! :map doom-leader-toggle-map
+      :desc "Centered window" "c" #'centered-window-mode-toggle)
+;; Visual line mode kb
+(map! :map doom-leader-toggle-map
+      :desc "Visual line mode" "v" #'visual-line-mode)
+
+;; Scrolling
+(setq scroll-step 5)
+(evil-define-motion scroll-n-lines-up (count)
+  "Scroll `scroll-step' up"
+  (evil-scroll-line-up scroll-step))
+(evil-define-motion scroll-n-lines-down (count)
+  "Scroll `scroll-step' down"
+  (evil-scroll-line-down scroll-step))
+(map! (:map override
+        "<M-up>" #'scroll-n-lines-up
+        "<M-down>" #'scroll-n-lines-down))
+
+;; Set theme
+(require 'doom-themes)
+(load-theme 'doom-one-light)
+
+(doom-themes-org-config)
+
+;; Set projectile search method
+(after! projectile
   (setq projectile-indexing-method 'hybrid))
 
+;; Set org notes folders
 (org-projectile-per-project)
 (setq org-projectile-per-project-filepath "TODO.org")
 (setq org-agenda-files (append org-agenda-files (org-projectile-todo-files)))
 (setq org-projectile-projects-file
       "~/org/")
 
+;; Set Avy keys
 (setq! avy-keys '(?n ?r ?t ?d ?e ?a ?i ?u))
 
+;; Set line numbers default
 (setq display-line-numbers-type 'relative)
 
-(setq mouse-wheel-progressive-speed nil)
-(setq mouse-wheel-scroll-amount
-      '(1 ((shift) . 1) ((control) . nil)))
 
-
+;; Set flycheck to check at save
 (setq! flycheck-check-syntax-automatically '(mode-enabled save))
 
 ;; Python
 ;; Make python cell mode default
+(require 'python-cell)
 (add-hook! 'python-mode-hook #'python-cell-mode)
 
+;; Set cell mode highlight
 (defun python-cell-range-function ()
   "Function to call to return highlight range.
 Highlight only the cell title. Return nil if the title
@@ -93,7 +99,6 @@ is off screen."
                nil))))
   )
 
-
 ;; Make default shell ipython
 (setq! python-shell-interpreter "ipython"
        python-shell-interpreter-args "console --simple-prompt"
@@ -107,10 +112,6 @@ is off screen."
   (setq client (jupyter-connect-repl (concat "~/.local/share/jupyter/runtime/" filename) filename))
   (jupyter-repl-associate-buffer client))
 
-;; maybe must connect it to buffer too
-;; set a buffer name for jupyter repl / client ?
-
-
 ;; Send cell to jupyter
 (defun jupyter-eval-cell ()
   "Eval current IPython cell."
@@ -122,7 +123,7 @@ is off screen."
                              (point))))
   (jupyter-eval-region start end)))
 
-;; Keybinds for jupyter-emacs
+;; Jupyter kb
 (map! :map jupyter-repl-interaction-mode-map "M-i" nil)
 (map! :leader
       (:prefix-map ("r" . "run")
