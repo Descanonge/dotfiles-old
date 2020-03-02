@@ -108,16 +108,13 @@ is off screen."
 
 ;; Function to find existing kernel by its filename
 (defun jupyter-connect-name (filename)
-  "Connect to a jupyter kernel by its `filename'."
-  (let ((dir "~/.local/share/jupyter/runtime/")))
+  "Connect to a jupyter kernel by its FILENAME."
   (interactive (list (ivy-read "Connection file name: "
-    (mapcar #'car
-      (cl-sort
-        (seq-subseq (directory-files-and-attributes dir) 2)
-        #'time-less-p :key #'(lambda (x) (nth 6 x)))))))
-  ;; (interactive (list (read-string "Connection file name: ")))
-  ;; client (jupyter-connect-repl (concat "~/.local/share/jupyter/runtime/" filename) filename))
-  (setq client (jupyter-connect-repl (concat dir filename) filename))
+                               (mapcar #'car
+                                       (reverse (cl-sort
+        (seq-subseq (directory-files-and-attributes "~/.local/share/jupyter/runtime/") 2)
+        #'time-less-p :key #'(lambda (x) (nth 6 x))))))))
+  (setq client (jupyter-connect-repl (concat "~/.local/share/jupyter/runtime/" filename) filename))
   (jupyter-repl-associate-buffer client))
 
 ;; Send cell to jupyter
