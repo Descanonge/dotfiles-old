@@ -132,11 +132,16 @@ is off screen."
   (jupyter-eval-region start end)))
 
 ;; Jupyter kb
+;; TODO: only in python-mode
 (map! :map jupyter-repl-interaction-mode-map "M-i" nil)
 (map! :leader
       (:prefix-map ("r" . "run")
         :desc "Connect to kernel" "k" #'jupyter-connect-name
-        :desc "Send line ro region" "l" #'jupyter-eval-line-or-region
+        :desc "Send line or region" "l" #'jupyter-eval-line-or-region
         :desc "Send string" "s" #'jupyter-eval-string-command
         :desc "Send cell" "c" #'jupyter-eval-cell
+        :desc "Send buffer" "b" #'jupyter-eval-buffer
+        :desc "Interrupt kernel" "i" #'jupyter-interrupt-kernel
+        ))
+
         ))
