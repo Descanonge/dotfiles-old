@@ -31,6 +31,13 @@
         :niv "M-i" #'org-metaleft
         :niv "M-e" #'org-metaright))
 
+(map! (:map evil-window-map
+        "N" #'+evil/window-move-left
+        "T" #'+evil/window-move-right
+        "G" #'+evil/window-move-up
+        "R" #'+evil/window-move-down))
+
+
 ;; Move line kb
 (map! :n "M-l" ":m-2")
 (map! :n "M-a" ":m+")
