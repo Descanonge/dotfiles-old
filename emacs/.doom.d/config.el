@@ -21,6 +21,8 @@
         "M-n" #'evil-window-left
         "M-g" #'evil-window-up
         "M-r" #'evil-window-down))
+(map! :leader
+        :desc "Diff" "gd" #'magit-diff)
 
 ;; Org move item kb
 (map! (:map evil-org-mode-map
