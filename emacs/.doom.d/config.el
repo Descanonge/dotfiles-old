@@ -144,4 +144,11 @@ is off screen."
         :desc "Interrupt kernel" "i" #'jupyter-interrupt-kernel
         ))
 
+;; Multi cursor kb
+(map! (:when (featurep! :editor multiple-cursors)
+        :prefix "gz"
+        :nv "j" nil
+        :desc "Make, move next line" :nv "<down>" #'evil-mc-make-cursor-move-next-line
+        :nv "k" nil
+        :desc "Make, move prev line" :nv "<up>" #'evil-mc-make-cursor-move-prev-line
         ))
