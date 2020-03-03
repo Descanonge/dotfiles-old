@@ -37,6 +37,24 @@
         "G" #'+evil/window-move-up
         "R" #'+evil/window-move-down))
 
+;; Insert a single character
+(evil-define-command evil-insert-char (count char)
+  "Insert COUNT times character CHAR."
+  (interactive "<c><C>")
+  (setq count (or count 1))
+  (insert (make-string count char)))
+
+(evil-define-command evil-append-char (count char)
+  "Append COUNT times character CHAR."
+  (interactive "<c><C>")
+  (setq count (or count 1))
+  (when (not (eolp))
+    (forward-char))
+  (insert (make-string count char))
+  (backward-char))
+
+(map! :n "l" #'evil-insert-char
+      :n "L" #'evil-append-char)
 
 ;; Move line kb
 (map! :n "M-l" ":m-2")
