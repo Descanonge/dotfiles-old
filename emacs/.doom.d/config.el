@@ -85,6 +85,11 @@
 
 (doom-themes-org-config)
 
+;; Remove buffer size indication
+(after! doom-modeline
+  (setq size-indication-mode nil)
+  (setq doom-modeline-buffer-encoding nil))
+
 ;; Set projectile search method
 (after! projectile
   (setq projectile-indexing-method 'hybrid))
