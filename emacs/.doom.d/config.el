@@ -90,6 +90,9 @@
   (setq size-indication-mode nil)
   (setq doom-modeline-buffer-encoding nil))
 
+;; Set first frame to maximised
+(add-to-list 'initial-frame-alist '(fullscreen . maximized))
+
 ;; Set projectile search method
 (after! projectile
   (setq projectile-indexing-method 'hybrid))
