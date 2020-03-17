@@ -155,9 +155,9 @@ is off screen."
   "Eval current IPython cell."
   (interactive)
   (let (
-        (start (save-excursion (python-beginning-of-cell)
+        (start (save-excursion (python-cell-beginning-of-cell)
                                (point)))
-        (end (save-excursion (python-end-of-cell)
+        (end (save-excursion (python-cell-end-of-cell)
                              (point))))
   (jupyter-eval-region start end)))
 
