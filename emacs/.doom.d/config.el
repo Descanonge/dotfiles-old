@@ -79,6 +79,11 @@
         "<M-up>" #'scroll-n-lines-up
         "<M-down>" #'scroll-n-lines-down))
 
+;; Scroll in magit buffers
+(map! (:map magit-mode-map
+        :prefix "z"
+        :nv "t" #'evil-scroll-line-to-top))
+
 ;; Set theme
 (require 'doom-themes)
 (load-theme 'doom-one-light)
