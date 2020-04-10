@@ -5,8 +5,10 @@
 (setq projectile-project-search-path
       '("~/Documents/"
         "~/Documents/Work/"
+        "~/Documents/Websites/"
         "~/Documents/Programmes/Libraries/Python/"
         "~/Documents/Programmes/Libraries/Latex/"
+        "~/Documents/Programmes/Libraries/Web/"
         "~/Documents/Programmes/Applications/"))
 
 
