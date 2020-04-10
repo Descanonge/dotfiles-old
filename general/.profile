@@ -44,3 +44,5 @@ fi
 
 export PYTHONPATH="$HOME/.anaconda3/pythonpath"
 
+php "$HOME/.scripts/update_visible_earth.php" &
+
