@@ -126,6 +126,11 @@
 (require 'python-cell)
 (add-hook! 'python-mode-hook #'python-cell-mode)
 
+;; Move cells
+(map! (:map python-cell-mode-map
+      :nv "]g" #'python-cell-forward-cell
+      :nv "[g" #'python-cell-backward-cell))
+
 ;; Set cell mode highlight
 (defun python-cell-range-function ()
   "Function to call to return highlight range.
