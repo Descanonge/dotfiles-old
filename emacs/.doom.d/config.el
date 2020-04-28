@@ -56,6 +56,13 @@
 (map! :n "l" #'evil-insert-char
       :n "L" #'evil-append-char)
 
+;; Add symbol motions
+(map! (:map evil-motion-state-map
+        "é" 'forward-symbol
+        "É" 'sp-backward-symbol)
+      (:map evil-inner-text-objects-map
+        "é" 'evil-inner-symbol))
+
 ;; Move line kb
 (map! :n "M-l" ":m-2")
 (map! :n "M-a" ":m+")
