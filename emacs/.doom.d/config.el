@@ -203,3 +203,11 @@ is off screen."
         :nv "k" nil
         :desc "Make, move prev line" :nv "<up>" #'evil-mc-make-cursor-move-prev-line
         ))
+
+(defface font-lock-ds-arguments-face
+  '((t :inherit font-lock-doc-face
+       :slant normal)) "Face for docstring arguments."
+)
+
+(font-lock-add-keywords 'python-mode
+                        '(("[ ^:]*:param \\([a-zA-Z0-9_^:]*\\):" 1 "font-lock-ds-arguments-face" t)))
