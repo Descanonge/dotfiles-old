@@ -1,5 +1,7 @@
 ;;; .doom.d/config.el -*- lexical-binding: t; -*-
 
+;; Set first frame to maximised
+(add-to-list 'initial-frame-alist '(fullscreen . maximized))
 
 ;; PROJECTILE folders
 (setq projectile-project-search-path
@@ -101,9 +103,6 @@
 (after! doom-modeline
   (setq size-indication-mode nil)
   (setq doom-modeline-buffer-encoding nil))
-
-;; Set first frame to maximised
-(add-to-list 'initial-frame-alist '(fullscreen . maximized))
 
 ;; Set projectile search method
 (after! projectile
