@@ -40,16 +40,14 @@
         "R" #'+evil/window-move-down))
 
 ;; Insert a single character
-(evil-define-command evil-insert-char (count char)
+(evil-define-command evil-insert-char (&optional count char)
   "Insert COUNT times character CHAR."
-  (interactive "<c><C>")
-  (setq count (or count 1))
+  (interactive "pc")
   (insert (make-string count char)))
 
-(evil-define-command evil-append-char (count char)
+(evil-define-command evil-append-char (&optional count char)
   "Append COUNT times character CHAR."
-  (interactive "<c><C>")
-  (setq count (or count 1))
+  (interactive "pc")
   (when (not (eolp))
     (forward-char))
   (insert (make-string count char))
