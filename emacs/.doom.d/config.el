@@ -125,35 +125,54 @@
 
 ;; Set flycheck to check at save
 (setq! flycheck-check-syntax-automatically '(mode-enabled save))
-
-;; Python
-;; Make python cell mode default
-(require 'python-cell)
-(add-hook! 'python-mode-hook #'python-cell-mode)
-
-;; Move cells
-(map! (:map python-cell-mode-map
-      :nv "]g" #'python-cell-forward-cell
-      :nv "[g" #'python-cell-backward-cell))
-
-;; Set cell mode highlight
-(defun python-cell-range-function ()
-  "Function to call to return highlight range.
-Highlight only the cell title. Return nil if the title
-is off screen."
-  (save-match-data
-    (save-excursion
-      (progn (end-of-line)
-             (if (re-search-backward python-cell-cellbreak-regexp nil t)
-                 (let ((start (goto-char (match-beginning 0)))
-                       (end (goto-char (match-end 0))))
-                   `(,start . ,end))
-               nil))))
-  )
 ;; Set mypy config file
 (setq! flycheck-python-mypy-ini "~/.config/mypy/config")
 (setq-default flycheck-disabled-checkers '(python-mypy python-pycompile))
 
+;; Python-cells
+(use-package! python-cell
+  :init
+  ;; Make python cell mode default
+  (add-hook! 'python-mode-hook #'python-cell-mode)
+
+  :config
+
+  (defun python-cell-previous-cell ()
+    "Move to beginning of cell or previous cell")
+
+  ;; Move cells
+  (map! (:map python-cell-mode-map
+          :nv "]g" #'python-cell-forward-cell
+          :nv "[g" #'python-cell-backward-cell))
+
+  ;; Add ipython sections to imenu
+  (add-hook 'python-mode-hook
+            (lambda ()
+              (add-to-list'imenu-generic-expression
+               (list "Sections" python-cell-cellbreak-regexp 1))
+              (imenu-add-to-menubar "Position")
+              (setq imenu-create-index-function 'python-merge-imenu)))
+  (defun python-merge-imenu ()
+    (interactive)
+    (let ((mode-imenu (python-imenu-create-index))
+          (custom-imenu (imenu--generic-function imenu-generic-expression)))
+      (append mode-imenu custom-imenu)))
+
+  ;; Set cell mode highlight
+  (defun python-cell-range-function ()
+    "Function to call to return highlight range.
+  Highlight only the cell title. Return nil if the title
+  is off screen."
+    (save-match-data
+      (save-excursion
+        (progn (end-of-line)
+              (if (re-search-backward python-cell-cellbreak-regexp nil t)
+                  (let ((start (goto-char (match-beginning 0)))
+                        (end (goto-char (match-end 0))))
+                    `(,start . ,end))
+                nil))))
+    )
+)
 
 ;; Make default shell ipython
 (setq! python-shell-interpreter "ipython"
