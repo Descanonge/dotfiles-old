@@ -150,6 +150,10 @@ is off screen."
                    `(,start . ,end))
                nil))))
   )
+;; Set mypy config file
+(setq! flycheck-python-mypy-ini "~/.config/mypy/config")
+(setq-default flycheck-disabled-checkers '(python-mypy python-pycompile))
+
 
 ;; Make default shell ipython
 (setq! python-shell-interpreter "ipython"
