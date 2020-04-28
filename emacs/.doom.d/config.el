@@ -64,6 +64,14 @@
         "É" 'sp-backward-symbol)
       (:map evil-inner-text-objects-map
         "é" 'evil-inner-symbol))
+(add-to-list 'evil-mc-custom-known-commands
+             '(forward-symbol . ((:default . evil-mc-execute-default-call-with-count)
+                                 (visual . evil-mc-execute-visual-call-with-count))))
+(nconc evil-mc-custom-known-commands
+        '((forward-symbol . ((:default . evil-mc-execute-default-call-with-count)
+                             (visual . evil-mc-execute-visual-call-with-count)))
+          (sp-backward-symbol . ((:default . evil-mc-execute-default-call-with-count)
+                                 (visual . evil-mc-execute-visual-call-with-count)))))
 
 ;; Move line kb
 (map! :n "M-l" ":m-2")
