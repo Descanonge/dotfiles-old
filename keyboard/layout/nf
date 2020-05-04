@@ -13,4 +13,7 @@ xkb_symbols "neo_fr" {
     key <AB01> { [ ecircumflex,   Ecircumflex, numbersign, NoSymbol,                Escape,  Escape,    union,         NoSymbol  ] };
     key <AB02> { [ egrave,        Egrave,      dollar,     U03F5,                   Tab,     Tab,       intersection,  NoSymbol  ] };
     key <AB03> { [ eacute,        Eacute,      bar,        Greek_eta,               Insert,  Insert,    U2135,         NoSymbol  ] };
+
+    key <SPCE> { [ space,         space,       space,      nobreakspace,            Escape,  KP_0,      U202F,         NoSymbol  ] };
+
 };
