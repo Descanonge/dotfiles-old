@@ -28,6 +28,10 @@
 (map! :leader
         :desc "Diff" "gd" #'magit-diff)
 
+;; Move line kb
+(map! :n "M-l" ":m-2")
+(map! :n "M-a" ":m+")
+
 ;; Org move item kb
 (map! (:map evil-org-mode-map
         :niv "M-l" #'org-metaup
@@ -64,18 +68,13 @@
         "É" 'sp-backward-symbol)
       (:map evil-inner-text-objects-map
         "é" 'evil-inner-symbol))
-(add-to-list 'evil-mc-custom-known-commands
-             '(forward-symbol . ((:default . evil-mc-execute-default-call-with-count)
-                                 (visual . evil-mc-execute-visual-call-with-count))))
-(nconc evil-mc-custom-known-commands
-        '((forward-symbol . ((:default . evil-mc-execute-default-call-with-count)
-                             (visual . evil-mc-execute-visual-call-with-count)))
-          (sp-backward-symbol . ((:default . evil-mc-execute-default-call-with-count)
-                                 (visual . evil-mc-execute-visual-call-with-count)))))
+(after! 'multiple-cursors
+  (nconc evil-mc-custom-known-commands
+         '((forward-symbol . ((:default . evil-mc-execute-default-call-with-count)
+                              (visual . evil-mc-execute-visual-call-with-count)))
+           (sp-backward-symbol . ((:default . evil-mc-execute-default-call-with-count)
+                                  (visual . evil-mc-execute-visual-call-with-count))))))
 
-;; Move line kb
-(map! :n "M-l" ":m-2")
-(map! :n "M-a" ":m+")
 
 ;; Centered mode kb
 (map! :map doom-leader-toggle-map
