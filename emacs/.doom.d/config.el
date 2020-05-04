@@ -75,6 +75,14 @@
            (sp-backward-symbol . ((:default . evil-mc-execute-default-call-with-count)
                                   (visual . evil-mc-execute-visual-call-with-count))))))
 
+;; Moving by paragraphs does not add to the jump list
+(evil-define-motion evil-forward-paragraph (count)
+  "Move to the end of the COUNT-th next paragraph."
+  :type exclusive
+  (evil-signal-at-bob-or-eob count)
+  (evil-forward-end 'evil-paragraph count)
+  (unless (eobp) (forward-line)))
+
 
 ;; Centered mode kb
 (map! :map doom-leader-toggle-map
