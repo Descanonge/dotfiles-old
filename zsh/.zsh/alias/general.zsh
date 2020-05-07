@@ -2,10 +2,10 @@
 alias v="vim"
 alias j="jump"
 
-alias l="/usr/bin/ls --color"
-alias ls="/usr/bin/ls --color -lh"
-alias la="/usr/bin/ls --color -A"
-alias ll="/usr/bin/ls --color -lAh"
+alias l="/usr/bin/ls --color=auto -p"
+alias la="/usr/bin/ls --color=auto -pA"
+alias ll="/usr/bin/ls --color=auto -plh"
+alias lla="/usr/bin/ls --color=auto -plAh"
 
 alias sz="du -hc -d1 . | sort -h"
 
