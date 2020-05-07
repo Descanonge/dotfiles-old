@@ -1,7 +1,3 @@
-# exists.
-# see /usr/share/doc/bash/examples/startup-files for examples.
-# the files are located in the bash-doc package.
-
 # the default umask is set in /etc/profile; for setting the umask
 # for ssh logins, install and configure the libpam-umask package.
 #umask 022
@@ -21,14 +17,14 @@ export LC_TIME=fr_FR.utf8
 if [ -n "$BASH_VERSION" ]; then
     # include .bashrc if it exists
     if [ -f "$HOME/.bashrc" ]; then
-	. "$HOME/.bashrc"
+        . "$HOME/.bashrc"
     fi
 fi
 
 # if running zsh
 if [ -n "$ZSH_VERSION" ]; then
     if [ -f "$HOME/.zsh/zshrc" ]; then
-	. "$HOME/.zsh/zshrc"
+        . "$HOME/.zsh/zshrc"
     fi
 fi
 
