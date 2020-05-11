@@ -62,6 +62,7 @@ plugins=(git
 	 jump
 	 sudo
 	 pip
+	 zsh-autosuggestions
 	 )
 
 eval $(thefuck --alias)
