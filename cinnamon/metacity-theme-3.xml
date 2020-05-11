@@ -10,25 +10,25 @@
 
 <!-- meaningfull constants -->
 
-<constant name="C_title_focused" value="#CFD8DC" />
-<constant name="C_title_unfocused" value="blend/#222D32/#CFD8DC/0.4" />
+<constant name="C_title_focused" value="gtk:custom(theme_inverted_fg_color,gtk:fg[NORMAL])" />
+<constant name="C_title_unfocused" value="gtk:custom(theme_unfocused_inverted_fg_color,gtk:fg[NORMAL])" />
 <constant name="D_icons_unfocused_offset" value="0" /> <!-- offset of the unfocused icons -->
 
 <!-- geometries -->
 
-<frame_geometry name="normal" has_title="false" title_scale="medium" rounded_top_left="1" rounded_top_right="1">
-	<distance name="left_width" value="2" />
-	<distance name="right_width" value="2" />
-	<distance name="bottom_height" value="2" />
+<frame_geometry name="normal" has_title="false" rounded_top_left="1" rounded_top_right="1">
+	<distance name="left_width" value="0" />
+	<distance name="right_width" value="0" />
+	<distance name="bottom_height" value="0" />
 	<distance name="left_titlebar_edge" value="0"/>
 	<distance name="right_titlebar_edge" value="0"/>
-	<distance name="title_vertical_pad" value="12"/>
-	<border name="title_border" left="10" right="10" top="0" bottom="0"/>
+	<distance name="title_vertical_pad" value="0" />
 	<border name="button_border" left="0" right="0" top="0" bottom="0"/>
+	<border name="title_border" left="0" right="0" top="0" bottom="0" />
 	<aspect_ratio name="button" value="1"/>
 </frame_geometry>
 
-<frame_geometry name="max" title_scale="medium" parent="normal" rounded_top_left="false" rounded_top_right="false">
+<frame_geometry name="max" has_title="false" parent="normal" rounded_top_left="false" rounded_top_right="false">
 	<distance name="left_width" value="0" />
 	<distance name="right_width" value="0" />
 	<distance name="bottom_height" value="0" />
@@ -75,16 +75,26 @@
 	<!-- title -->
 
 <draw_ops name="title_focused">
-	<title
+	<title version="< 3.1"
 	       x="(0 `max` ((width - title_width) / 2))"
 	       y="(0 `max` ((height - title_height) / 2))"
+	       color="C_title_focused" />
+	<title version=">= 3.1"
+	       x="(0 `max` ((frame_x_center - title_width / 2) `min` (width - title_width)))"
+	       y="(0 `max` ((height - title_height) / 2))"
+	       ellipsize_width="width"
 	       color="C_title_focused" />
 </draw_ops>
 
 <draw_ops name="title_unfocused">
-	<title
+	<title version="< 3.1"
 	       x="(0 `max` ((width - title_width) / 2))"
 	       y="(0 `max` ((height - title_height) / 2))"
+	       color="C_title_unfocused"/>
+	<title version=">= 3.1"
+	       x="(0 `max` ((frame_x_center - title_width/2) `min` (width - title_width)))"
+	       y="(0 `max` ((height - title_height) / 2))"
+	       ellipsize_width="width"
 	       color="C_title_unfocused"/>
 </draw_ops>
 
@@ -92,8 +102,8 @@
 
 <!-- normal state -->
 <draw_ops name="entire_background_focused">
-	<rectangle color="#222D32" x="0" y="0" width="width" height="height" filled="true" />
-	<line color="#29353B" x1="1" y1="0" x2="width-2" y2="0" />
+	<rectangle color="gtk:custom(wm_bg_a,gtk:bg[NORMAL])" x="0" y="0" width="width" height="height" filled="true" />
+	<line color="gtk:custom(wm_bg_b,gtk:bg[NORMAL])" x1="1" y1="0" x2="width-2" y2="0" />
 </draw_ops>
 
 <draw_ops name="entire_background_unfocused">
@@ -130,7 +140,7 @@
 
 <!-- maximized state -->
 <draw_ops name="max_entire_background_focused">
-	<rectangle color="#222D32" x="0" y="0" width="width" height="height" filled="true" />
+	<rectangle color="gtk:custom(wm_bg_a,gtk:bg[NORMAL])" x="0" y="0" width="width" height="height" filled="true" />
 </draw_ops>
 
 <draw_ops name="max_entire_background_unfocused">
@@ -155,8 +165,8 @@
 
 <!-- tiled state -->
 <draw_ops name="tiled_left_entire_background_focused">
-	<rectangle color="#222D32" x="0" y="0" width="width" height="height" filled="true" />
-	<line color="#13191C" x1="width-1" y1="0" x2="width-1" y2="height" />
+	<rectangle color="gtk:custom(wm_bg_a,gtk:bg[NORMAL])" x="0" y="0" width="width" height="height" filled="true" />
+	<line color="gtk:custom(wm_bg_c,gtk:bg[NORMAL])" x1="width-1" y1="0" x2="width-1" y2="height" />
 </draw_ops>
 
 <draw_ops name="tiled_left_entire_background_unfocused">
@@ -172,8 +182,8 @@
 </draw_ops>
 
 <draw_ops name="tiled_right_entire_background_focused">
-	<rectangle color="#222D32" x="0" y="0" width="width" height="height" filled="true" />
-	<line color="#13191C" x1="0" y1="0" x2="0" y2="height" />
+	<rectangle color="gtk:custom(wm_bg_a,gtk:bg[NORMAL])" x="0" y="0" width="width" height="height" filled="true" />
+	<line color="gtk:custom(wm_bg_c,gtk:bg[NORMAL])" x1="0" y1="0" x2="0" y2="height" />
 </draw_ops>
 
 <draw_ops name="tiled_right_entire_background_unfocused">
@@ -436,6 +446,8 @@
 	<button function="menu" state="normal" draw_ops="menu_focused" />
 	<button function="menu" state="prelight" draw_ops="menu_focused_prelight" />
 	<button function="menu" state="pressed" draw_ops="menu_focused_pressed" />
+	<button version=">= 3.5" function="appmenu" state="normal" draw_ops="appmenu_focused" />
+	<button version=">= 3.5" function="appmenu" state="pressed" draw_ops="appmenu_focused_pressed" />
 	<button function="shade" state="normal" draw_ops="shade_focused" />
 	<button function="shade" state="prelight" draw_ops="shade_focused_prelight" />
 	<button function="shade" state="pressed" draw_ops="shade_focused_pressed" />
@@ -474,6 +486,9 @@
 	<button function="menu" state="normal" draw_ops="menu_unfocused" />
 	<button function="menu" state="prelight" draw_ops="menu_unfocused_prelight" />
 	<button function="menu" state="pressed" draw_ops="menu_unfocused_pressed" />
+	<button version=">= 3.5" function="appmenu" state="normal" draw_ops="appmenu_unfocused" />
+	<button version=">= 3.5" function="appmenu" state="prelight" draw_ops="appmenu_unfocused_pressed" />
+	<button version=">= 3.5" function="appmenu" state="pressed" draw_ops="appmenu_unfocused_pressed" />
 	<button function="shade" state="normal" draw_ops="shade_unfocused" />
 	<button function="shade" state="prelight" draw_ops="shade_unfocused_prelight" />
 	<button function="shade" state="pressed" draw_ops="shade_unfocused_pressed" />
@@ -512,6 +527,8 @@
 	<button function="menu" state="normal" draw_ops="menu_focused" />
 	<button function="menu" state="prelight" draw_ops="menu_focused_prelight" />
 	<button function="menu" state="pressed" draw_ops="menu_focused_pressed" />
+	<button version=">= 3.5" function="appmenu" state="normal" draw_ops="appmenu_focused" />
+	<button version=">= 3.5" function="appmenu" state="pressed" draw_ops="appmenu_focused_pressed" />
 	<button function="shade" state="normal" draw_ops="shade_focused" />
 	<button function="shade" state="prelight" draw_ops="shade_focused_prelight" />
 	<button function="shade" state="pressed" draw_ops="shade_focused_pressed" />
@@ -550,6 +567,9 @@
 	<button function="menu" state="normal" draw_ops="menu_unfocused" />
 	<button function="menu" state="prelight" draw_ops="menu_unfocused_prelight" />
 	<button function="menu" state="pressed" draw_ops="menu_unfocused_pressed" />
+	<button version=">= 3.5" function="appmenu" state="normal" draw_ops="appmenu_unfocused" />
+	<button version=">= 3.5" function="appmenu" state="prelight" draw_ops="appmenu_unfocused_pressed" />
+	<button version=">= 3.5" function="appmenu" state="pressed" draw_ops="appmenu_unfocused_pressed" />
 	<button function="shade" state="normal" draw_ops="shade_unfocused" />
 	<button function="shade" state="prelight" draw_ops="shade_unfocused_prelight" />
 	<button function="shade" state="pressed" draw_ops="shade_unfocused_pressed" />
@@ -588,6 +608,8 @@
 	<button function="menu" state="normal" draw_ops="menu_focused" />
 	<button function="menu" state="prelight" draw_ops="menu_focused_prelight" />
 	<button function="menu" state="pressed" draw_ops="menu_focused_pressed" />
+	<button version=">= 3.5" function="appmenu" state="normal" draw_ops="appmenu_focused" />
+	<button version=">= 3.5" function="appmenu" state="pressed" draw_ops="appmenu_focused_pressed" />
 	<button function="shade" state="normal" draw_ops="shade_focused" />
 	<button function="shade" state="prelight" draw_ops="shade_focused_prelight" />
 	<button function="shade" state="pressed" draw_ops="shade_focused_pressed" />
@@ -626,6 +648,9 @@
 	<button function="menu" state="normal" draw_ops="menu_unfocused" />
 	<button function="menu" state="prelight" draw_ops="menu_unfocused_prelight" />
 	<button function="menu" state="pressed" draw_ops="menu_unfocused_pressed" />
+	<button version=">= 3.5" function="appmenu" state="normal" draw_ops="appmenu_unfocused" />
+	<button version=">= 3.5" function="appmenu" state="prelight" draw_ops="appmenu_unfocused_pressed" />
+	<button version=">= 3.5" function="appmenu" state="pressed" draw_ops="appmenu_unfocused_pressed" />
 	<button function="shade" state="normal" draw_ops="shade_unfocused" />
 	<button function="shade" state="prelight" draw_ops="shade_unfocused_pressed" />
 	<button function="shade" state="pressed" draw_ops="shade_unfocused_pressed" />
@@ -664,6 +689,8 @@
 	<button function="menu" state="normal" draw_ops="menu_focused" />
 	<button function="menu" state="prelight" draw_ops="menu_focused_prelight" />
 	<button function="menu" state="pressed" draw_ops="menu_focused_pressed" />
+	<button version=">= 3.5" function="appmenu" state="normal" draw_ops="appmenu_focused" />
+	<button version=">= 3.5" function="appmenu" state="pressed" draw_ops="appmenu_focused_pressed" />
 	<button function="shade" state="normal" draw_ops="shade_focused" />
 	<button function="shade" state="prelight" draw_ops="shade_focused_prelight" />
 	<button function="shade" state="pressed" draw_ops="shade_focused_pressed" />
@@ -702,6 +729,9 @@
 	<button function="menu" state="normal" draw_ops="menu_unfocused" />
 	<button function="menu" state="prelight" draw_ops="menu_unfocused_prelight" />
 	<button function="menu" state="pressed" draw_ops="menu_unfocused_pressed" />
+	<button version=">= 3.5" function="appmenu" state="normal" draw_ops="appmenu_unfocused" />
+	<button version=">= 3.5" function="appmenu" state="prelight" draw_ops="appmenu_unfocused_pressed" />
+	<button version=">= 3.5" function="appmenu" state="pressed" draw_ops="appmenu_unfocused_pressed" />
 
 	<button function="left_middle_background" state="pressed" draw_ops="button_pressed"/>
 	<button function="left_middle_background" state="prelight" draw_ops="button_prelight"/>
@@ -738,6 +768,8 @@
 	<button function="menu" state="normal" draw_ops="menu_focused" />
 	<button function="menu" state="prelight" draw_ops="menu_focused_prelight" />
 	<button function="menu" state="pressed" draw_ops="menu_focused_pressed" />
+	<button version=">= 3.5" function="appmenu" state="normal" draw_ops="appmenu_focused" />
+	<button version=">= 3.5" function="appmenu" state="pressed" draw_ops="appmenu_focused_pressed" />
 	<button function="shade" state="normal" draw_ops="shade_focused" />
 	<button function="shade" state="prelight" draw_ops="shade_focused_prelight" />
 	<button function="shade" state="pressed" draw_ops="shade_focused_pressed" />
@@ -775,6 +807,9 @@
 	<button function="menu" state="normal" draw_ops="menu_unfocused" />
 	<button function="menu" state="prelight" draw_ops="menu_unfocused_prelight" />
 	<button function="menu" state="pressed" draw_ops="menu_unfocused_pressed" />
+	<button version=">= 3.5" function="appmenu" state="normal" draw_ops="appmenu_unfocused" />
+	<button version=">= 3.5" function="appmenu" state="prelight" draw_ops="appmenu_unfocused_pressed" />
+	<button version=">= 3.5" function="appmenu" state="pressed" draw_ops="appmenu_unfocused_pressed" />
 	<button function="shade" state="normal" draw_ops="shade_unfocused" />
 	<button function="shade" state="prelight" draw_ops="shade_unfocused_prelight" />
 	<button function="shade" state="pressed" draw_ops="shade_unfocused_pressed" />
@@ -813,6 +848,8 @@
 	<button function="menu" state="normal" draw_ops="menu_focused" />
 	<button function="menu" state="prelight" draw_ops="menu_focused_prelight" />
 	<button function="menu" state="pressed" draw_ops="menu_focused_pressed" />
+	<button version=">= 3.5" function="appmenu" state="normal" draw_ops="appmenu_focused" />
+	<button version=">= 3.5" function="appmenu" state="pressed" draw_ops="appmenu_focused_pressed" />
 	<button function="shade" state="normal" draw_ops="shade_focused" />
 	<button function="shade" state="prelight" draw_ops="shade_focused_prelight" />
 	<button function="shade" state="pressed" draw_ops="shade_focused_pressed" />
@@ -851,6 +888,9 @@
 	<button function="menu" state="normal" draw_ops="menu_unfocused" />
 	<button function="menu" state="prelight" draw_ops="menu_unfocused_prelight" />
 	<button function="menu" state="pressed" draw_ops="menu_unfocused_pressed" />
+	<button version=">= 3.5" function="appmenu" state="normal" draw_ops="appmenu_unfocused" />
+	<button version=">= 3.5" function="appmenu" state="prelight" draw_ops="appmenu_unfocused_pressed" />
+	<button version=">= 3.5" function="appmenu" state="pressed" draw_ops="appmenu_unfocused_pressed" />
 	<button function="shade" state="normal" draw_ops="shade_unfocused" />
 	<button function="shade" state="prelight" draw_ops="shade_unfocused_prelight" />
 	<button function="shade" state="pressed" draw_ops="shade_unfocused_pressed" />
@@ -883,6 +923,8 @@
 	<button function="minimize" state="pressed"><draw_ops></draw_ops></button>
 	<button function="menu" state="normal"><draw_ops></draw_ops></button>
 	<button function="menu" state="pressed"><draw_ops></draw_ops></button>
+	<button version=">= 3.5" function="appmenu" state="normal"><draw_ops></draw_ops></button>
+	<button version=">= 3.5" function="appmenu" state="pressed"><draw_ops></draw_ops></button>
 	<button function="shade" state="normal"><draw_ops></draw_ops></button>
 	<button function="shade" state="pressed"><draw_ops></draw_ops></button>
 	<button function="unshade" state="normal"><draw_ops></draw_ops></button>
@@ -907,6 +949,8 @@
 	<button function="minimize" state="pressed"><draw_ops></draw_ops></button>
 	<button function="menu" state="normal"><draw_ops></draw_ops></button>
 	<button function="menu" state="pressed"><draw_ops></draw_ops></button>
+	<button version=">= 3.5" function="appmenu" state="normal"><draw_ops></draw_ops></button>
+	<button version=">= 3.5" function="appmenu" state="pressed"><draw_ops></draw_ops></button>
 	<button function="shade" state="normal"><draw_ops></draw_ops></button>
 	<button function="shade" state="pressed"><draw_ops></draw_ops></button>
 	<button function="unshade" state="normal"><draw_ops></draw_ops></button>
@@ -930,6 +974,8 @@
 	<button function="minimize" state="pressed"><draw_ops></draw_ops></button>
 	<button function="menu" state="normal"><draw_ops></draw_ops></button>
 	<button function="menu" state="pressed"><draw_ops></draw_ops></button>
+	<button version=">= 3.5" function="appmenu" state="normal"><draw_ops></draw_ops></button>
+	<button version=">= 3.5" function="appmenu" state="pressed"><draw_ops></draw_ops></button>
 	<button function="shade" state="normal"><draw_ops></draw_ops></button>
 	<button function="shade" state="pressed"><draw_ops></draw_ops></button>
 	<button function="unshade" state="normal"><draw_ops></draw_ops></button>
@@ -956,6 +1002,8 @@
 	<button function="minimize" state="pressed"><draw_ops></draw_ops></button>
 	<button function="menu" state="normal"><draw_ops></draw_ops></button>
 	<button function="menu" state="pressed"><draw_ops></draw_ops></button>
+	<button version=">= 3.5" function="appmenu" state="normal"><draw_ops></draw_ops></button>
+	<button version=">= 3.5" function="appmenu" state="pressed"><draw_ops></draw_ops></button>
 	<button function="shade" state="normal"><draw_ops></draw_ops></button>
 	<button function="shade" state="pressed"><draw_ops></draw_ops></button>
 	<button function="unshade" state="normal"><draw_ops></draw_ops></button>
@@ -982,6 +1030,8 @@
 	<button function="minimize" state="pressed"><draw_ops></draw_ops></button>
 	<button function="menu" state="normal"><draw_ops></draw_ops></button>
 	<button function="menu" state="pressed"><draw_ops></draw_ops></button>
+	<button version=">= 3.5" function="appmenu" state="normal"><draw_ops></draw_ops></button>
+	<button version=">= 3.5" function="appmenu" state="pressed"><draw_ops></draw_ops></button>
 	<button function="shade" state="normal"><draw_ops></draw_ops></button>
 	<button function="shade" state="pressed"><draw_ops></draw_ops></button>
 	<button function="unshade" state="normal"><draw_ops></draw_ops></button>
@@ -1012,6 +1062,8 @@
 	<button function="menu" state="normal" draw_ops="menu_focused" />
 	<button function="menu" state="prelight" draw_ops="menu_focused_prelight" />
 	<button function="menu" state="pressed" draw_ops="menu_focused_pressed" />
+	<button version=">= 3.5" function="appmenu" state="normal" draw_ops="appmenu_focused" />
+	<button version=">= 3.5" function="appmenu" state="pressed" draw_ops="appmenu_focused_pressed" />
 	<button function="shade" state="normal" draw_ops="shade_focused" />
 	<button function="shade" state="prelight" draw_ops="shade_focused_prelight" />
 	<button function="shade" state="pressed" draw_ops="shade_focused_pressed" />
@@ -1050,6 +1102,9 @@
 	<button function="menu" state="normal" draw_ops="menu_unfocused" />
 	<button function="menu" state="prelight" draw_ops="menu_unfocused_prelight" />
 	<button function="menu" state="pressed" draw_ops="menu_unfocused_pressed" />
+	<button version=">= 3.5" function="appmenu" state="normal" draw_ops="appmenu_unfocused" />
+	<button version=">= 3.5" function="appmenu" state="prelight" draw_ops="appmenu_unfocused_pressed" />
+	<button version=">= 3.5" function="appmenu" state="pressed" draw_ops="appmenu_unfocused_pressed" />
 	<button function="shade" state="normal" draw_ops="shade_unfocused" />
 	<button function="shade" state="prelight" draw_ops="shade_unfocused_prelight" />
 	<button function="shade" state="pressed" draw_ops="shade_unfocused_pressed" />
@@ -1088,6 +1143,8 @@
 	<button function="menu" state="normal" draw_ops="menu_focused" />
 	<button function="menu" state="prelight" draw_ops="menu_focused_prelight" />
 	<button function="menu" state="pressed" draw_ops="menu_focused_pressed" />
+	<button version=">= 3.5" function="appmenu" state="normal" draw_ops="appmenu_focused" />
+	<button version=">= 3.5" function="appmenu" state="pressed" draw_ops="appmenu_focused_pressed" />
 	<button function="shade" state="normal" draw_ops="shade_focused" />
 	<button function="shade" state="prelight" draw_ops="shade_focused_prelight" />
 	<button function="shade" state="pressed" draw_ops="shade_focused_pressed" />
@@ -1126,6 +1183,9 @@
 	<button function="menu" state="normal" draw_ops="menu_unfocused" />
 	<button function="menu" state="prelight" draw_ops="menu_unfocused_prelight" />
 	<button function="menu" state="pressed" draw_ops="menu_unfocused_pressed" />
+	<button version=">= 3.5" function="appmenu" state="normal" draw_ops="appmenu_unfocused" />
+	<button version=">= 3.5" function="appmenu" state="prelight" draw_ops="appmenu_unfocused_pressed" />
+	<button version=">= 3.5" function="appmenu" state="pressed" draw_ops="appmenu_unfocused_pressed" />
 	<button function="shade" state="normal" draw_ops="shade_unfocused" />
 	<button function="shade" state="prelight" draw_ops="shade_unfocused_prelight" />
 	<button function="shade" state="pressed" draw_ops="shade_unfocused_pressed" />
@@ -1158,6 +1218,8 @@
 	<button function="minimize" state="pressed"><draw_ops></draw_ops></button>
 	<button function="menu" state="normal"><draw_ops></draw_ops></button>
 	<button function="menu" state="pressed"><draw_ops></draw_ops></button>
+	<button version=">= 3.5" function="appmenu" state="normal"><draw_ops></draw_ops></button>
+	<button version=">= 3.5" function="appmenu" state="pressed"><draw_ops></draw_ops></button>
 	<button function="shade" state="normal"><draw_ops></draw_ops></button>
 	<button function="shade" state="pressed"><draw_ops></draw_ops></button>
 	<button function="unshade" state="normal"><draw_ops></draw_ops></button>
@@ -1183,6 +1245,14 @@
 	<frame focus="no" state="shaded" style="normal_unfocused"/>
 	<frame focus="yes" state="maximized_and_shaded" style="normal_max_shaded_focused"/>
 	<frame focus="no" state="maximized_and_shaded" style="normal_max_shaded_unfocused"/>
+	<frame version=">= 3.3" focus="yes" state="tiled_left" style="tiled_left_focused"/>
+	<frame version=">= 3.3" focus="no" state="tiled_left" style="tiled_left_unfocused"/>
+	<frame version=">= 3.3" focus="yes" state="tiled_right" style="tiled_right_focused"/>
+	<frame version=">= 3.3" focus="no" state="tiled_right" style="tiled_right_unfocused"/>
+	<frame version=">= 3.3" focus="yes" state="tiled_left_and_shaded" style="tiled_left_focused"/>
+	<frame version=">= 3.3" focus="no" state="tiled_left_and_shaded" style="tiled_left_unfocused"/>
+	<frame version=">= 3.3" focus="yes" state="tiled_right_and_shaded" style="tiled_right_focused"/>
+	<frame version=">= 3.3" focus="no" state="tiled_right_and_shaded" style="tiled_right_unfocused"/>
 </frame_style_set>
 
 <frame_style_set name="dialog_style_set">
@@ -1249,5 +1319,6 @@
 <window type="menu" style_set="utility_style_set"/>
 <window type="utility" style_set="utility_style_set"/>
 <window type="border" style_set="border_style_set"/>
+<window version=">= 3.2" type="attached" style_set="attached_style_set"/>
 
 </metacity_theme>
