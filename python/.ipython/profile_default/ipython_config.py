@@ -32,6 +32,7 @@
 c.InteractiveShellApp.exec_lines = [
     'import numpy as np',
     'import matplotlib.pyplot as plt',
+    'plt.style.use("common")',
     '%load_ext autoreload',
     '%aimport -sys, builtins, types, numpy, scipy, matplotlib',
     '%autoreload 2'
