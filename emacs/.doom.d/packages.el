@@ -14,6 +14,4 @@
 ;; Python
 (package! python-cell)
 
-(package! org-projectile)
-
 (package! doom-themes)
