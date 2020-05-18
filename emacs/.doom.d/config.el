@@ -81,7 +81,7 @@
 
 
 ;;; Multiple cursors
-(after! multiple-cursors
+(after! evil-mc
   (map! :prefix "gz"
         :nv "j" nil
         :desc "Make, move next line" :nv "<down>" #'evil-mc-make-cursor-move-next-line
