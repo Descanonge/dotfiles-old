@@ -12,11 +12,6 @@
       )
 
 
-;; Scroll in magit buffers
-(map! :map magit-mode-map
-        :prefix "z"
-        :nv "t" #'evil-scroll-line-to-top)
-
 (map! :n "M-l" #'drag-stuff-up
       :n "M-a" #'drag-stuff-down
 
@@ -24,13 +19,6 @@
       :desc "Centered window" "c" #'centered-window-mode-toggle
       :map doom-leader-toggle-map
       :desc "Visual line mode" "v" #'visual-line-mode
-
-      :map magit-mode-map
-      "M-n" nil
-      :leader
-      :desc "Diff" "gd" #'magit-diff)
-
-
 ;;; EVIL
 (after! evil
   ;; Scrolling
@@ -119,6 +107,20 @@
           "~/Documents/Programmes/Libraries/Latex/"
           "~/Documents/Programmes/Libraries/Web/"
           "~/Documents/Programmes/Applications/")))
+
+
+;;; Magit
+;; Scroll in magit buffers
+(after! magit
+  (map! (:map magit-mode-map
+          :prefix "z"
+          :nv "t" #'evil-scroll-line-to-top)
+
+        (:map magit-mode-map
+          "M-n" nil)
+
+        :leader
+        :desc "Diff" "gd" #'magit-diff))
 
 
 ;;; Org
