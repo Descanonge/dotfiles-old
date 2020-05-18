@@ -41,5 +41,4 @@
 (save-excursion
   (save-selected-window
     (select-window (split-window-right))
-    (org-agenda nil "n")
-    ))
+    (org-agenda nil "n")))

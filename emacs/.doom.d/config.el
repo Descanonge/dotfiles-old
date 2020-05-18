@@ -144,6 +144,8 @@
 (use-package! org
   :init
   (setq org-cycle-separator-lines 1)
+  (setq org-blank-before-new-entry '((heading . t)
+                                     (plain-list-item . t)))
   (setq thunderbird-program "/usr/bin/thunderbird")
 
   :config
