@@ -3,7 +3,6 @@
 ;; Set first frame to maximised
 (add-to-list 'initial-frame-alist '(fullscreen . maximized))
 
-
 (setq user-full-name "Clément Haëck"
       user-mail-address "clement.haeck@posteo.net"
 
@@ -26,13 +25,13 @@
   (map! :n "M-l" #'drag-stuff-up
         :n "M-a" #'drag-stuff-down
 
+        :n "l" #'evil-insert-char
+        :n "L" #'evil-append-char
+
         :map doom-leader-toggle-map
         :desc "Centered window" "c" #'centered-window-mode-toggle
         :map doom-leader-toggle-map
-        :desc "Visual line mode" "v" #'visual-line-mode
-
-        :n "l" #'evil-insert-char
-        :n "L" #'evil-append-char)
+        :desc "Visual line mode" "v" #'visual-line-mode)
 
   (map! :map override
         "<M-up>" #'scroll-n-lines-up
