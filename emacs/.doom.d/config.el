@@ -329,3 +329,7 @@ from SLASH-MESSAGE-ID link into a thunderlink and then invokes thunderbird."
 
 (font-lock-add-keywords 'python-mode
                         '(("[ ^:]*:param \\([a-zA-Z0-9_^:]*\\):" 1 "font-lock-ds-arguments-face" t)))
+
+
+(load! "+dashboard.el")
+
