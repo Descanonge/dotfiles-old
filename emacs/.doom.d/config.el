@@ -136,7 +136,11 @@
       :niv "M-L" #'org-shiftmetaup
       :niv "M-A" #'org-shiftmetadown
       :niv "M-I" #'org-shiftmetaleft
-      :niv "M-E" #'org-shiftmetaright)
+      :niv "M-E" #'org-shiftmetaright
+
+      :localleader
+      :desc "Sparse" "m" #'org-sparse-tree
+      )
 
 (use-package! org
   :init
