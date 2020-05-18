@@ -12,13 +12,6 @@
       )
 
 
-(map! :n "M-l" #'drag-stuff-up
-      :n "M-a" #'drag-stuff-down
-
-      :map doom-leader-toggle-map
-      :desc "Centered window" "c" #'centered-window-mode-toggle
-      :map doom-leader-toggle-map
-      :desc "Visual line mode" "v" #'visual-line-mode
 ;;; EVIL
 (after! evil
   ;; Scrolling
@@ -29,30 +22,40 @@
   (evil-define-motion scroll-n-lines-down (count)
     "Scroll `scroll-step' down"
     (evil-scroll-line-down scroll-step))
-  (map! (:map override
-          "<M-up>" #'scroll-n-lines-up
-          "<M-down>" #'scroll-n-lines-down))
 
-  (map! :map evil-window-map
+  (map! :n "M-l" #'drag-stuff-up
+        :n "M-a" #'drag-stuff-down
+
+        :map doom-leader-toggle-map
+        :desc "Centered window" "c" #'centered-window-mode-toggle
+        :map doom-leader-toggle-map
+        :desc "Visual line mode" "v" #'visual-line-mode
+
+        :n "l" #'evil-insert-char
+        :n "L" #'evil-append-char)
+
+  (map! :map override
+        "<M-up>" #'scroll-n-lines-up
+        "<M-down>" #'scroll-n-lines-down
+
+        :i "C-a" #'+default/newline
+
+        "M-t" #'evil-window-right
+        "M-n" #'evil-window-left
+        "M-g" #'evil-window-up
+        "M-r" #'evil-window-down
+
+        :map evil-window-map
         "N" #'+evil/window-move-left
         "T" #'+evil/window-move-right
         "G" #'+evil/window-move-up
         "R" #'+evil/window-move-down
 
         :map evil-motion-state-map
-        "é" 'forward-symbol
-        "É" 'sp-backward-symbol
+        "é" #'forward-symbol
+        "É" #'sp-backward-symbol
         :map evil-inner-text-objects-map
-        "é" 'evil-inner-symbol
-
-        :map override
-        "M-t" #'evil-window-right
-        "M-n" #'evil-window-left
-        "M-g" #'evil-window-up
-        "M-r" #'evil-window-down)
-
-  (map! :n "l" #'evil-insert-char
-        :n "L" #'evil-append-char)
+        "é" #'evil-inner-symbol)
 
 
   ;; Moving by paragraphs does not add to the jump list
