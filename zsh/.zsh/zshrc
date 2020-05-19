@@ -59,12 +59,12 @@ VIRTUAL_ENV_DISABLE_PROMPT="False"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(git
          colorize
-	 copydir
-	 jump
-	 sudo
-	 pip
-	 zsh-autosuggestions
-	 )
+         copydir
+         jump
+         sudo
+         pip
+         zsh-autosuggestions
+        )
 
 eval $(thefuck --alias)
 eval "$(direnv hook zsh)"
