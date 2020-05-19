@@ -226,7 +226,8 @@ from SLASH-MESSAGE-ID link into a thunderlink and then invokes thunderbird."
           ((agenda "" ((org-agenda-show-all-dates nil)
                        (org-agenda-start-day "today")
                        (org-agenda-span 7)))
-            (alltodo ""))))
+           (todo "TODO" ((org-agenda-todo-ignore-scheduled "future")))
+           )))
   )
 
 ;;; Theme
