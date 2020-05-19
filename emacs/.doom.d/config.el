@@ -213,7 +213,14 @@ from SLASH-MESSAGE-ID link into a thunderlink and then invokes thunderbird."
   (org-link-set-parameters "message" :follow #'org-message-thunderlink-open)
   )
 
-(after! org-agenda
+(use-package! org-agenda
+  :init
+  (map! :map doom-leader-map
+        :leader
+        :desc "Agenda" "A" (lambda () (interactive) (org-agenda nil "n"))
+        :desc "truc" "a" 'do-this)
+
+  :config
   (org-add-agenda-custom-command
         '("n" "Agenda and all TODOs"
           ((agenda "" ((org-agenda-show-all-dates nil)
