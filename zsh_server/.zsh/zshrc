@@ -1,7 +1,7 @@
 
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="bira"
-# DEFAULT_USER="clement"
+ZSH_THEME="agnosterer"
+DEFAULT_USER="clement"
 
 
 # Uncomment the following line to use case-sensitive completion.
