@@ -2,7 +2,7 @@
 export ZSH_ALIAS="$ZDOTDIR/alias"
 
 # Path to your oh-my-zsh installation.
-export ZSH="$ZDOTDIR/oh-my-zsh"
+export ZSH="$HOME/.oh-my-zsh"
 
 
 source $ZDOTDIR/zshrc
