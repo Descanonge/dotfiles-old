@@ -217,8 +217,7 @@ from SLASH-MESSAGE-ID link into a thunderlink and then invokes thunderbird."
   :init
   (map! :map doom-leader-map
         :leader
-        :desc "Agenda" "A" (lambda () (interactive) (org-agenda nil "n"))
-        :desc "truc" "a" 'do-this)
+        :desc "Agenda" "A" (lambda () (interactive) (org-agenda nil "n")))
 
   :config
   (org-add-agenda-custom-command
@@ -250,6 +249,12 @@ from SLASH-MESSAGE-ID link into a thunderlink and then invokes thunderbird."
   ;; Set mypy config file
   (setq! flycheck-python-mypy-ini "~/.config/mypy/config")
   (setq-default flycheck-disabled-checkers '(python-mypy python-pycompile))
+
+
+;;; Direnv
+(use-package! direnv
+  :init
+  (setq direnv-always-show-summary nil)
   )
 
 ;;; Python
