@@ -282,7 +282,7 @@ from SLASH-MESSAGE-ID link into a thunderlink and then invokes thunderbird."
   ;; Add ipython sections to imenu
   (add-hook 'python-mode-hook
             (lambda ()
-              (add-to-list'imenu-generic-expression
+              (add-to-list 'imenu-generic-expression
                (list "Sections" python-cell-cellbreak-regexp 1))
               (imenu-add-to-menubar "Position")
               (setq imenu-create-index-function 'python-merge-imenu)))
@@ -306,6 +306,15 @@ from SLASH-MESSAGE-ID link into a thunderlink and then invokes thunderbird."
                      `(,start . ,end))
                  nil))))
     )
+  )
+
+(use-package! anaconda-mode
+  :init
+  (defun inhibit-anaconda-remote ()
+    (when (file-remote-p (buffer-file-name))
+      (anaconda-mode -1)
+      (anaconda-eldoc-mode -1)))
+  (add-hook! 'find-file-hook #'inhibit-anaconda-remote)
   )
 
 
