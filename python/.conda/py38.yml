@@ -1,0 +1,11 @@
+name: py38
+dependencies:
+    - python=3.8
+    - numpy
+    - scipy
+    - matplotlib
+    - netCDF4
+    - ipython
+    - jupyter
+    - pip:
+      - thefuck
