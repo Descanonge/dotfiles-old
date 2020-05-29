@@ -80,6 +80,13 @@ else
     fi
 fi
 unset __conda_setup
+# <<< conda initialize <<<
+
+# Autocomplete ssh / scp / ftp commands from ssh config file
+[ -r ~/.ssh/config ] && _ssh_config_hosts=($(cat ~/.ssh/config | sed -ne 's/Host[=\t ]//p')) || _ssh_config_hosts=()
+[ -r ~/.ssh/config ] && _ssh_config_users=($(cat ~/.ssh/config | sed -ne 's/User[=\t ]//p')) || _ssh_config_users=()
+zstyle ':completion:*:(ssh|scp|ftp|sftp):*' hosts $_ssh_config_hosts
+zstyle ':completion:*:(ssh|scp|ftp|sftp):*' users $_ssh_config_users
 
 eval $(thefuck --alias)
 eval "$(direnv hook zsh)"
