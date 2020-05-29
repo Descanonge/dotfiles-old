@@ -28,17 +28,19 @@ if [ -n "$ZSH_VERSION" ]; then
     fi
 fi
 
-# set PATH so it includes python
-if [ -d "$HOME/.anaconda3/bin" ]; then
-    PATH="$HOME/.anaconda3/bin:$PATH"
+# Add conda to PATH
+if [ -d "$HOME/.miniconda3/bin" ] ; then
+    PATH="$HOME/.miniconda3/bin:$PATH"
 fi
 
 # set PATH so it includes user's private bin if it exists
+# Can overwrite conda bins if non-activated
 if [ -d "$HOME/.local/bin" ] ; then
     PATH="$HOME/.local/bin:$PATH"
 fi
 
-export PYTHONPATH="$HOME/.anaconda3/pythonpath"
+
+export PYTHONPATH="$HOME/.miniconda3/pythonpath"
 
 php "$HOME/.scripts/update_visible_earth.php" &
 

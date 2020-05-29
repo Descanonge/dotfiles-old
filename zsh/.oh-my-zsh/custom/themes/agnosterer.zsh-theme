@@ -213,8 +213,9 @@ prompt_dir() {
 
 # Virtualenv: current working virtualenv
 prompt_virtualenv() {
-  local virtualenv_path="$VIRTUAL_ENV"
-  if [[ -n $virtualenv_path && -n $VIRTUAL_ENV_DISABLE_PROMPT ]]; then
+  local virtualenv_path="$CONDA_DEFAULT_ENV"
+  if [[ -n $virtualenv_path && -n $VIRTUAL_ENV_DISABLE_PROMPT \
+    && $virtualenv_path != $CONDA_DEFAULT_ENV_HIDE ]]; then
     prompt_segment yellow default "(`basename $virtualenv_path`)"
   fi
 }

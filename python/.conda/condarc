@@ -1,3 +1,4 @@
 changeps1: false
 
-auto_activate_base: bool
+auto_activate_base: false
+auto_stack: false
