@@ -255,7 +255,7 @@ from SLASH-MESSAGE-ID link into a thunderlink and then invokes thunderbird."
   (setq! flycheck-check-syntax-automatically '(mode-enabled save))
   ;; Set mypy config file
   (setq! flycheck-python-mypy-ini "~/.config/mypy/config")
-  (setq-default flycheck-disabled-checkers '(python-mypy python-pycompile))
+  (setq-default flycheck-disabled-checkers '(python-mypy python-pycompile)))
 
 
 ;;; Direnv
