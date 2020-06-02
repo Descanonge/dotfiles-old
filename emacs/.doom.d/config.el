@@ -54,7 +54,14 @@
         "é" #'forward-symbol
         "É" #'sp-backward-symbol
         :map evil-inner-text-objects-map
-        "é" #'evil-inner-symbol)
+        "é" #'evil-inner-symbol
+
+        :map doom-leader-workspace-map
+        "[" #'+workspace/swap-left
+        "]" #'+workspace/swap-right
+        "(" #'+workspace/switch-left
+        ")" #'+workspace/switch-right
+        )
 
 
   ;; Moving by paragraphs does not add to the jump list
