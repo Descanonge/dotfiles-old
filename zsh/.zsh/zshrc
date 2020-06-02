@@ -65,6 +65,7 @@ plugins=(git
          sudo
          pip
          zsh-autosuggestions
+         conda-zsh-completion
         )
 
 # >>> conda initialize >>>
