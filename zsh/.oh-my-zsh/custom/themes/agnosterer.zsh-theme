@@ -117,7 +117,7 @@ prompt_git() {
     if [[ -n $dirty ]]; then
       prompt_segment yellow default
     else
-      prompt_segment green $CURRENT_FG
+      prompt_segment green default
     fi
 
     if [[ -e "${repo_path}/BISECT_LOG" ]]; then
@@ -185,7 +185,7 @@ prompt_hg() {
         st='±'
       else
         # if working copy is clean
-        prompt_segment green $CURRENT_FG
+        prompt_segment green black
       fi
       echo -n $(hg prompt "☿ {rev}@{branch}") $st
     else
@@ -199,7 +199,7 @@ prompt_hg() {
         prompt_segment yellow black
         st='±'
       else
-        prompt_segment green $CURRENT_FG
+        prompt_segment green black
       fi
       echo -n "☿ $rev@$branch" $st
     fi
