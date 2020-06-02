@@ -21,6 +21,7 @@ if [ -n "$BASH_VERSION" ]; then
     fi
 fi
 
+
 # if running zsh
 if [ -n "$ZSH_VERSION" ]; then
     if [ -f "$HOME/.zsh/zshrc" ]; then
@@ -28,13 +29,13 @@ if [ -n "$ZSH_VERSION" ]; then
     fi
 fi
 
+
 # Add conda to PATH
 if [ -d "$HOME/.miniconda3/bin" ] ; then
-    PATH="$HOME/.miniconda3/bin:$PATH"
+    PATH="$PATH:$HOME/.miniconda3/bin"
 fi
 
 # set PATH so it includes user's private bin if it exists
-# Can overwrite conda bins if non-activated
 if [ -d "$HOME/.local/bin" ] ; then
     PATH="$HOME/.local/bin:$PATH"
 fi
