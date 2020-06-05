@@ -4,6 +4,9 @@
 # Emacs
 .projectile
 
+# Direnv
+.envrc
+
 ## Build directories
 _build/
 
