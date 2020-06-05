@@ -253,6 +253,8 @@ from SLASH-MESSAGE-ID link into a thunderlink and then invokes thunderbird."
   :init
   ;; Set flycheck to check at save
   (setq! flycheck-check-syntax-automatically '(mode-enabled save))
+  ;; Set flake8 config file
+  (setq flycheck-flake8rc "~/.config/flake8")
   ;; Set mypy config file
   (setq! flycheck-python-mypy-ini "~/.config/mypy/config")
   (setq-default flycheck-disabled-checkers '(python-mypy python-pycompile)))
