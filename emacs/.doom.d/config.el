@@ -107,15 +107,24 @@
 ;;; Projectile
 (use-package! projectile
   :init
-  (setq projectile-indexing-method 'hybrid
-        projectile-project-search-path
+  (setq projectile-globally-ignored-file-suffixes
+        '(".swp" ".png" ".jpg" ".avi" ".mp4" ".svg" ".mkv" ".xcf"
+               ".pdf" ".dvi"
+               ".pyc" ".pyo" ".pyd" ".egg-info"
+               ".o" ".so" ".a" ".exe")
+        projectile-globally-ignored-directories
+        '(".*/__pycache__" ".git")
+        projectile-sort-order 'default)
+  (setq projectile-project-search-path
         '("~/Documents/"
           "~/Documents/Work/"
           "~/Documents/Websites/"
           "~/Documents/Programmes/Libraries/Python/"
           "~/Documents/Programmes/Libraries/Latex/"
           "~/Documents/Programmes/Libraries/Web/"
-          "~/Documents/Programmes/Applications/")))
+          "~/Documents/Programmes/Applications/"))
+  :config
+  (setq projectile-indexing-method 'native))
 
 
 ;;; Magit
