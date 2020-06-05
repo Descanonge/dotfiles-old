@@ -237,7 +237,7 @@ from SLASH-MESSAGE-ID link into a thunderlink and then invokes thunderbird."
   )
 
 ;;; Theme
-(load-theme 'doom-one-light)
+(load-theme 'doom-one-light t)
 (doom-themes-org-config)
 
 
