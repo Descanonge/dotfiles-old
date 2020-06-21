@@ -283,6 +283,12 @@ from SLASH-MESSAGE-ID link into a thunderlink and then invokes thunderbird."
   (setq direnv-always-show-summary nil)
   )
 
+(use-package! rst
+  :config
+  (map! :map rst-mode-map
+        "]g" #'rst-forward-section
+        "[g" #'rst-backward-section))
+
 ;;; Python
 (use-package! python
   :init
