@@ -340,6 +340,22 @@ from SLASH-MESSAGE-ID link into a thunderlink and then invokes thunderbird."
     )
   )
 
+
+(use-package! zeal-at-point
+  :init
+  (add-hook 'python-mode-hook
+            (lambda () (setq zeal-at-point-docset '("python" "numpy" "matplotlib" "scipy"))))
+  (map! :map doom-leader-code-map
+        "z" :desc "Zeal at point" #'zeal-at-point)
+  :config
+  (defun zeal-search (search)
+    "Search SEARCH in Zeal."
+    (interactive (list (completing-read "Zeal: " zeal-at-point-docsets)))
+    (zeal-at-point-run-search (concat "dash-plugin://query=%s" search))
+    )
+  (map! :map doom-leader-search-map
+   "z" :desc "Zeal" #'zeal-search)
+  )
 (use-package! anaconda-mode
   :init
   (defun inhibit-anaconda-remote ()
