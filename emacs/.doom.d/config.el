@@ -158,6 +158,12 @@
       :desc "Sparse" "m" #'org-sparse-tree
       )
 
+(use-package! markdown-mode
+  :config
+  (map! :map markdown-mode-map
+        :niv "M-l" nil
+        :niv "M-a" nil))
+
 (use-package! org
   :init
   (setq org-cycle-separator-lines 1)
