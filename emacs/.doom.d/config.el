@@ -356,6 +356,11 @@ from SLASH-MESSAGE-ID link into a thunderlink and then invokes thunderbird."
   (map! :map doom-leader-search-map
    "z" :desc "Zeal" #'zeal-search)
   )
+
+(use-package! counsel-dash
+  :init
+  (setq dash-docs-docsets-path "/home/clement/.local/share/Zeal/Zeal/docsets"))
+
 (use-package! anaconda-mode
   :init
   (defun inhibit-anaconda-remote ()
