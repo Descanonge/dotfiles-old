@@ -86,7 +86,11 @@ class Entry():
 
         print("Link %s -> %s" % (target, link))
         if not dry_run:
-            os.symlink(link, target)
+            try:
+                os.symlink(link, target)
+            except FileExistsError:
+                print(f"{link} already exists.")
+                pass
 
     def move_dir(self, dry_run):
         target = self.get_target()
@@ -112,7 +116,11 @@ class Entry():
 
         print("Link %s -> %s" % (target, link))
         if not dry_run:
-            os.symlink(link, target)
+            try:
+                os.symlink(link, target)
+            except FileExistsError:
+                print(f"{link} already exists.")
+                pass
 
 
 entries = []
