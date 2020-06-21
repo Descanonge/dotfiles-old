@@ -393,7 +393,7 @@ from SLASH-MESSAGE-ID link into a thunderlink and then invokes thunderbird."
   ;; Jupyter kb
   (map! :map jupyter-repl-interaction-mode-map "M-i" nil)
   (map! :leader
-        (:prefix-map ("r" . "run")
+        (:prefix ("r" . "run")
           :desc "Connect to kernel" "k" #'jupyter-connect-name
           :desc "Send line or region" "l" #'jupyter-eval-line-or-region
           :desc "Send string" "s" #'jupyter-eval-string-command
