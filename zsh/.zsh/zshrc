@@ -83,6 +83,11 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 
+
+# Ruby gems
+export GEM_HOME="$HOME/.gems"
+export PATH="$PATH:$HOME/.gems/bin"
+
 # Autocomplete ssh / scp / ftp commands from ssh config file
 [ -r ~/.ssh/config ] && _ssh_config_hosts=($(cat ~/.ssh/config | sed -ne 's/Host[=\t ]//p')) || _ssh_config_hosts=()
 [ -r ~/.ssh/config ] && _ssh_config_users=($(cat ~/.ssh/config | sed -ne 's/User[=\t ]//p')) || _ssh_config_users=()
