@@ -274,7 +274,7 @@ from SLASH-MESSAGE-ID link into a thunderlink and then invokes thunderbird."
   (setq flycheck-flake8rc "~/.config/flake8")
   ;; Set mypy config file
   (setq! flycheck-python-mypy-ini "~/.config/mypy/config")
-  (setq-default flycheck-disabled-checkers '(python-mypy python-pycompile)))
+  (setq-default flycheck-disabled-checkers '(python-mypy python-pycompile python-pylint)))
 
 
 ;;; Direnv
