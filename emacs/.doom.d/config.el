@@ -380,5 +380,6 @@ from SLASH-MESSAGE-ID link into a thunderlink and then invokes thunderbird."
                         '(("[ ^:]*:param \\([a-zA-Z0-9_^:]*\\):" 1 "font-lock-ds-arguments-face" t)))
 
 
-(load! "+dashboard.el")
+(use-package! liquid-mode)
 
+(load! "+dashboard.el")

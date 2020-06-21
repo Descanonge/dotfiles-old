@@ -15,3 +15,10 @@
 (package! python-cell)
 
 (package! doom-themes)
+
+(package! zeal-at-point)
+
+(package! liquid-mode
+  :recipe (:host github
+           :repo "alesguzik/liquid-mode"
+           :files ("*.el")))
