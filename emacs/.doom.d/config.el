@@ -176,6 +176,7 @@
          (let ((file (car (projectile-make-relative-to-root (list (buffer-file-name)))))
                (text (string-trim (org-current-line-string))))
            (format "* TODO %%?\n[[file:%s::%s]]\n\n" file text)))
+
   (setq org-capture-templates
         '(("t" "Personal todo" entry
            (file+headline +org-capture-todo-file "Inbox")
@@ -194,10 +195,9 @@
           ("pn" "Project-local notes" entry  ; {project-root}/notes.org
            (file+headline +org-capture-project-notes-file "General")
            "* %U %?\n%a\n\n" :prepend t)
-          ("pc" "Project-local changelog" entry  ; {project-root}/changelog.org
-           (file+headline +org-capture-project-changelog-file "Unreleased")
-           "* %U %?\n%a" :prepend t)
-
+          ("pc" "Project-local changelog" plain  ; {project-root}/changelog.org
+           (file +org-capture-project-changelog-file)
+           "- [%(format-time-string \"%Y-%m-%d\")] %?\n" :prepend t)
           ;; Will use {org-directory}/{+org-capture-projects-file} and store
           ;; these under {ProjectName}/{Tasks,Notes,Changelog} headings. They
           ;; support `:parents' to specify what headings to put them under, e.g.
@@ -217,7 +217,8 @@
            (function +org-capture-central-project-changelog-file)
            "* %U %?\n %i\n %a\n"
            :heading "Changelog"
-           :prepend t)))
+           :prepend t))
+        +org-capture-changelog-file "changelog.md")
 
   (defun org-message-thunderlink-open (slash-message-id)
     "Handler for  org-link-set-parameters that converts a standard message://
