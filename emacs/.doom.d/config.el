@@ -110,10 +110,11 @@
   (setq projectile-globally-ignored-file-suffixes
         '(".swp" ".png" ".jpg" ".avi" ".mp4" ".svg" ".mkv" ".xcf"
                ".pdf" ".dvi"
-               ".pyc" ".pyo" ".pyd" ".egg-info"
-               ".o" ".so" ".a" ".exe")
+               ".pyc" ".pyo" ".pyd"
+               ".o" ".so" ".a" ".exe" ".o.d")
         projectile-globally-ignored-directories
-        '(".*/__pycache__" ".git")
+        '(".*/__pycache__" ".*\.egg-info" ".git"
+          ".*/\.jekyll-cache" ".*/_build")
         projectile-sort-order 'default)
   (setq projectile-project-search-path
         '("~/Documents/"
