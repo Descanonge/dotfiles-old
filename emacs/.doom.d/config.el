@@ -112,9 +112,11 @@
                ".pdf" ".dvi"
                ".pyc" ".pyo" ".pyd"
                ".o" ".so" ".a" ".exe" ".o.d")
+        projectile-globally-ignored-files
+        '()
         projectile-globally-ignored-directories
-        '(".*/__pycache__" ".*\.egg-info" ".git"
-          ".*/\.jekyll-cache" ".*/_build")
+        '("__pycache__" "*.egg-info" ".git"
+          ".jekyll-cache" "_build")
         projectile-sort-order 'default)
   (setq projectile-project-search-path
         '("~/Documents/"
@@ -125,12 +127,32 @@
           "~/Documents/Programmes/Libraries/Web/"
           "~/Documents/Programmes/Applications/"))
   :config
-  (setq projectile-indexing-method 'native))
+  (setq projectile-indexing-method 'hybrid)
+
+  (setq projectile-generic-command
+        (lambda (_)
+          (let (bin)
+            (cond
+             ((setq bin (cl-find-if (doom-rpartial #'executable-find t)
+                                    '("fdfind" "fd")))
+              (concat (format "%s . -0 -H -E .git --color=never --type file --type symlink --follow"
+                              bin)
+                      (cl-loop for dir in projectile-globally-ignored-directories
+                               concat " -E "
+                               concat (shell-quote-argument dir))))
+             ((concat "find . -type f"
+                     (cl-loop for dir in projectile-globally-ignored-directories
+                              concat " -not -path "
+                              concat (shell-quote-argument (format "*/%s/*" dir)))
+                     " -printf '%P\\0'"))))))
+  )
 
 
 ;;; Magit
 ;; Scroll in magit buffers
 (after! magit
+  ;; Find git rather than prescribe its location. Useful for tramp
+  (setq magit-git-executable "git")
   (map! (:map magit-mode-map
           :prefix "z"
           :nv "t" #'evil-scroll-line-to-top)
