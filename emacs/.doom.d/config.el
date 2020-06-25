@@ -437,6 +437,11 @@ from SLASH-MESSAGE-ID link into a thunderlink and then invokes thunderbird."
                         '(("[ ^:]*:param \\([a-zA-Z0-9_^:]*\\):" 1 "font-lock-ds-arguments-face" t)))
 
 
+;;; TRAMP
+;; Add path for git on @ciclad
+(add-to-list 'tramp-remote-path "/opt/git/2.7.4/bin")
+
+
 (use-package! liquid-mode)
 
 (load! "+dashboard.el")
