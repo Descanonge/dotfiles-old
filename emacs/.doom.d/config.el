@@ -106,6 +106,7 @@
 ;;; Projectile
 (use-package! projectile
   :init
+  (setq projectile-track-known-projects-automatically nil)
   (setq projectile-globally-ignored-file-suffixes
         '(".swp" ".png" ".jpg" ".avi" ".mp4" ".svg" ".mkv" ".xcf"
                ".pdf" ".dvi"
@@ -117,14 +118,6 @@
         '("__pycache__" "*.egg-info" ".git"
           ".jekyll-cache" "_build")
         projectile-sort-order 'default)
-  (setq projectile-project-search-path
-        '("~/Documents/"
-          "~/Documents/Work/"
-          "~/Documents/Websites/"
-          "~/Documents/Programmes/Libraries/Python/"
-          "~/Documents/Programmes/Libraries/Latex/"
-          "~/Documents/Programmes/Libraries/Web/"
-          "~/Documents/Programmes/Applications/"))
   :config
   (setq projectile-indexing-method 'hybrid)
 
