@@ -57,12 +57,11 @@
         "é" #'evil-inner-symbol
 
         :map doom-leader-workspace-map
-        "[" #'+workspace/swap-left
-        "]" #'+workspace/swap-right
+        "[" :desc "Swap left" #'+workspace/swap-left
+        "]" :desc "Swap right" #'+workspace/swap-right
         "(" #'+workspace/switch-left
         ")" #'+workspace/switch-right
         )
-
 
   ;; Moving by paragraphs does not add to the jump list
   (evil-define-motion evil-forward-paragraph (count)
