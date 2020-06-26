@@ -272,11 +272,15 @@ from SLASH-MESSAGE-ID link into a thunderlink and then invokes thunderbird."
 (doom-themes-org-config)
 
 
-(use-package! doom-modeline
-  :init
-  ;; Remove buffer size and encoding
-  (setq size-indication-mode nil)
-  (setq doom-modeline-buffer-encoding nil))
+(after! doom-modeline
+  (setq size-indication-mode nil
+        doom-modeline-buffer-encoding nil
+        doom-modeline-checker-simple-format nil
+        doom-modeline-vcs-max-length 30
+        doom-modeline-percent-position nil)
+
+  (remove-hook! 'doom-modeline-mode-hook 'size-indication-mode)
+  )
 
 (use-package! parrot
   :config
