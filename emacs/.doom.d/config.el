@@ -278,6 +278,15 @@ from SLASH-MESSAGE-ID link into a thunderlink and then invokes thunderbird."
   (setq size-indication-mode nil)
   (setq doom-modeline-buffer-encoding nil))
 
+(use-package! parrot
+  :config
+  (map! :map evil-normal-state-map
+        "!" #'parrot-rotate-next-word-at-point)
+  (parrot-mode)
+  (setq parrot-directory (concat doom-private-dir "parrot/"))
+  (parrot-set-parrot-type 'default)
+  (setq parrot-rotate-highlight-after-rotation nil
+        parrot-animation-frame-interval 0.030))
 
 ;;; Flycheck
 (use-package! flycheck

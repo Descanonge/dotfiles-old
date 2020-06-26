@@ -22,3 +22,5 @@
   :recipe (:host github
            :repo "alesguzik/liquid-mode"
            :files ("*.el")))
+
+(package! parrot)
