@@ -290,7 +290,11 @@ from SLASH-MESSAGE-ID link into a thunderlink and then invokes thunderbird."
   (setq parrot-directory (concat doom-private-dir "parrot/"))
   (parrot-set-parrot-type 'default)
   (setq parrot-rotate-highlight-after-rotation nil
-        parrot-animation-frame-interval 0.030))
+        parrot-animation-frame-interval 0.030)
+
+  (defun parrot-start-animation-advice (old-function &rest arguments)
+    (parrot-start-animation))
+  (advice-add 'evil-ex-substitute :after #'parrot-start-animation-advice))
 
 ;;; Flycheck
 (use-package! flycheck
