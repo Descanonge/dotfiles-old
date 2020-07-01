@@ -133,12 +133,21 @@
                                concat " -E "
                                concat (shell-quote-argument dir))))
              ((concat "find . -type f"
-                     (cl-loop for dir in projectile-globally-ignored-directories
-                              concat " -not -path "
-                              concat (shell-quote-argument (format "*/%s/*" dir)))
-                     " -printf '%P\\0'"))))))
-  )
+                      (cl-loop for dir in projectile-globally-ignored-directories
+                               concat " -not -path "
+                               concat (shell-quote-argument (format "*/%s/*" dir)))
+                      " -printf '%P\\0'"))))))
 
+  (defun projectile-project-name-function-remote (project-root)
+    (let* ((dir (directory-file-name project-root))
+           (name (file-name-nondirectory dir))
+           (remote-p (file-remote-p dir 'host))
+           (remote (if remote-p (format "@%s" remote-p))))
+      (concat name remote)
+      ))
+
+  (setq projectile-project-name-function #'projectile-project-name-function-remote)
+  )
 
 ;;; Magit
 ;; Scroll in magit buffers
