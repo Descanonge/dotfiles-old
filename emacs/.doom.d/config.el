@@ -1,4 +1,4 @@
-;;; .doom.d/config.el -*- lexical-binding: t; -*-
+;;; .doom.d/config.el --- Config
 
 ;; Set first frame to maximised
 (add-to-list 'initial-frame-alist '(fullscreen . maximized))
@@ -320,7 +320,8 @@ from SLASH-MESSAGE-ID link into a thunderlink and then invokes thunderbird."
   (setq flycheck-flake8rc "~/.config/flake8")
   ;; Set mypy config file
   (setq! flycheck-python-mypy-ini "~/.config/mypy/config")
-  (setq-default flycheck-disabled-checkers '(python-mypy python-pycompile python-pylint)))
+  (setq-default flycheck-disabled-checkers '(python-mypy python-pycompile python-pylint
+                                                         emacs-lisp-checkdoc)))
 
 
 ;;; Direnv
@@ -445,13 +446,13 @@ from SLASH-MESSAGE-ID link into a thunderlink and then invokes thunderbird."
   (map! :map jupyter-repl-interaction-mode-map "M-i" nil)
   (map! :leader
         (:prefix ("r" . "run")
-          :desc "Connect to kernel" "k" #'jupyter-connect-name
-          :desc "Send line or region" "l" #'jupyter-eval-line-or-region
-          :desc "Send string" "s" #'jupyter-eval-string-command
-          :desc "Send cell" "c" #'jupyter-eval-cell
-          :desc "Send buffer" "b" #'jupyter-eval-buffer
-          :desc "Interrupt kernel" "i" #'jupyter-interrupt-kernel
-          )))
+         :desc "Connect to kernel" "k" #'jupyter-connect-name
+         :desc "Send line or region" "l" #'jupyter-eval-line-or-region
+         :desc "Send string" "s" #'jupyter-eval-string-command
+         :desc "Send cell" "c" #'jupyter-eval-cell
+         :desc "Send buffer" "b" #'jupyter-eval-buffer
+         :desc "Interrupt kernel" "i" #'jupyter-interrupt-kernel
+         )))
 
 (defface font-lock-ds-arguments-face
   '((t :inherit font-lock-doc-face
@@ -469,3 +470,7 @@ from SLASH-MESSAGE-ID link into a thunderlink and then invokes thunderbird."
 (use-package! liquid-mode)
 
 (load! "+dashboard.el")
+
+;; Local Variables:
+;; byte-compile-warnings: (not free-vars)
+;; End:
