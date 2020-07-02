@@ -117,10 +117,16 @@
         projectile-globally-ignored-directories
         '("__pycache__" "*.egg-info" ".git"
           ".jekyll-cache" "_build")
-        projectile-sort-order 'default)
+        projectile-sort-order 'default
+        projectile-projects
+        '("~/.dotfiles"
+          "~/Documents/Libraries/Python/Tomate"
+          "~/Documents/Libraries/Python/MyPack"
+          "~/Documents/Work/Fronts"
+          "/sshx:ciclad:/home/chaeck/Fronts"))
   :config
   (setq projectile-indexing-method 'hybrid)
-
+  (setq projectile-known-projects projectile-projects)
   (setq projectile-generic-command
         (lambda (_)
           (let (bin)
